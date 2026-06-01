@@ -1,29 +1,44 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Header } from "@/components/site/Header";
+import { Hero } from "@/components/site/Hero";
+import { NewsSection } from "@/components/site/NewsSection";
+import { BentoSection } from "@/components/site/BentoSection";
+import { OffersSection } from "@/components/site/OffersSection";
+import { ReviewSection } from "@/components/site/ReviewSection";
+import { Footer } from "@/components/site/Footer";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Gamer Guide — O seu radar gamer definitivo" },
+      {
+        name: "description",
+        content:
+          "Notícias em primeira mão, reviews completos e as maiores promoções de games. Seu checkpoint diário no mundo gamer.",
+      },
+      { property: "og:title", content: "Gamer Guide — O seu radar gamer definitivo" },
+      {
+        property: "og:description",
+        content:
+          "Notícias, reviews e as melhores ofertas de jogos atualizadas em tempo real.",
+      },
     ],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-dvh bg-background text-foreground">
+      <Header />
+      <main>
+        <Hero />
+        <NewsSection />
+        <BentoSection />
+        <OffersSection />
+        <ReviewSection />
+      </main>
+      <Footer />
     </div>
   );
 }
