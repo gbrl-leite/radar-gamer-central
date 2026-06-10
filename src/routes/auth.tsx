@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Logo } from "@/components/site/Logo";
 import { Toaster } from "@/components/ui/sonner";
-import authHero from "@/assets/auth-hero.jpg";
+import authHero from "@/assets/auth-hero-new.jpg";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
@@ -105,7 +105,7 @@ function AuthPage() {
             aria-hidden
           />
           <div className="relative z-10 flex h-full flex-col justify-between p-10">
-            <Logo showFull />
+            <Logo showFull minimal />
             <div className="max-w-md">
               <h2 className="text-4xl font-extrabold leading-tight tracking-tight">
                 Seu radar de <span className="text-gradient-radar">notícias e ofertas</span> gamer.
