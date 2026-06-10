@@ -91,10 +91,10 @@ function AuthPage() {
         <aside className="relative hidden lg:block">
           <img
             src={authHero}
-            alt="Gamer jogando com setup neon roxo e verde"
+            alt="Ilustração estilizada de gamer com neon roxo e verde"
             className="absolute inset-0 h-full w-full object-cover"
-            width={896}
-            height={1408}
+            width={1024}
+            height={1536}
           />
           <div
             className="absolute inset-0"
