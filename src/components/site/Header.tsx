@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "./Logo";
 
 const navItems = [
-  { label: "Notícias", to: "/" },
+  { label: "Notícias", to: "/noticias" },
   { label: "Promoções", to: "/" },
   { label: "Reviews", to: "/" },
 ] as const;
