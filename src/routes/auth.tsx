@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Logo } from "@/components/site/Logo";
 import { Toaster } from "@/components/ui/sonner";
-import authHero from "@/assets/auth-hero.jpg";
+import authHero from "@/assets/auth-hero-new.jpg";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
@@ -91,10 +91,10 @@ function AuthPage() {
         <aside className="relative hidden lg:block">
           <img
             src={authHero}
-            alt="Gamer jogando com setup neon roxo e verde"
+            alt="Ilustração estilizada de gamer com neon roxo e verde"
             className="absolute inset-0 h-full w-full object-cover"
-            width={896}
-            height={1408}
+            width={1024}
+            height={1536}
           />
           <div
             className="absolute inset-0"
@@ -105,7 +105,7 @@ function AuthPage() {
             aria-hidden
           />
           <div className="relative z-10 flex h-full flex-col justify-between p-10">
-            <Logo showFull />
+            <Logo showFull minimal />
             <div className="max-w-md">
               <h2 className="text-4xl font-extrabold leading-tight tracking-tight">
                 Seu radar de <span className="text-gradient-radar">notícias e ofertas</span> gamer.
