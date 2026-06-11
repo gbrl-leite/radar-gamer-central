@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as NoticiasRouteImport } from './routes/noticias'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as NoticiasIdRouteImport } from './routes/noticias.$id'
 
 const NoticiasRoute = NoticiasRouteImport.update({
   id: '/noticias',
@@ -28,35 +29,43 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NoticiasIdRoute = NoticiasIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => NoticiasRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/noticias': typeof NoticiasRoute
+  '/noticias': typeof NoticiasRouteWithChildren
+  '/noticias/$id': typeof NoticiasIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/noticias': typeof NoticiasRoute
+  '/noticias': typeof NoticiasRouteWithChildren
+  '/noticias/$id': typeof NoticiasIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/noticias': typeof NoticiasRoute
+  '/noticias': typeof NoticiasRouteWithChildren
+  '/noticias/$id': typeof NoticiasIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/noticias'
+  fullPaths: '/' | '/auth' | '/noticias' | '/noticias/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/noticias'
-  id: '__root__' | '/' | '/auth' | '/noticias'
+  to: '/' | '/auth' | '/noticias' | '/noticias/$id'
+  id: '__root__' | '/' | '/auth' | '/noticias' | '/noticias/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
-  NoticiasRoute: typeof NoticiasRoute
+  NoticiasRoute: typeof NoticiasRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -82,13 +91,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/noticias/$id': {
+      id: '/noticias/$id'
+      path: '/$id'
+      fullPath: '/noticias/$id'
+      preLoaderRoute: typeof NoticiasIdRouteImport
+      parentRoute: typeof NoticiasRoute
+    }
   }
 }
+
+interface NoticiasRouteChildren {
+  NoticiasIdRoute: typeof NoticiasIdRoute
+}
+
+const NoticiasRouteChildren: NoticiasRouteChildren = {
+  NoticiasIdRoute: NoticiasIdRoute,
+}
+
+const NoticiasRouteWithChildren = NoticiasRoute._addFileChildren(
+  NoticiasRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
-  NoticiasRoute: NoticiasRoute,
+  NoticiasRoute: NoticiasRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
