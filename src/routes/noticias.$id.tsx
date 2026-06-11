@@ -3,6 +3,7 @@ import { ArrowLeft, Calendar, Clock, User, Quote } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import heroImg from "@/assets/news-article-hero.jpg";
+import featuredImg from "@/assets/news-featured.jpg";
 import thumb1 from "@/assets/news-thumb-1.jpg";
 import thumb2 from "@/assets/news-thumb-2.jpg";
 import thumb3 from "@/assets/news-thumb-3.jpg";
@@ -21,41 +22,222 @@ export const Route = createFileRoute("/noticias/$id")({
   component: ArticlePage,
 });
 
-const related = [
-  {
-    id: "rtx-5090-review",
+type Article = {
+  category: string;
+  title: string;
+  excerpt: string;
+  image: string;
+  author: string;
+  date: string;
+  readingTime: string;
+  body: string[];
+  quote?: { text: string; author: string };
+};
+
+const mockNews: Record<string, Article> = {
+  "mundial-esports-2026": {
+    category: "E-sports",
+    title:
+      "Mundial de E-sports 2026: Brasil sedia maior arena gamer da América Latina",
+    excerpt:
+      "Com 25 mil lugares e infraestrutura de última geração, a arena promete revolucionar a forma como o público brasileiro acompanha competições internacionais.",
+    image: heroImg,
+    author: "Lucas Almeida",
+    date: "10 de Junho de 2026",
+    readingTime: "6 min de leitura",
+    body: [
+      "O cenário competitivo brasileiro acaba de dar um salto histórico. Anunciada nesta semana, a nova arena de e-sports localizada em São Paulo será a maior da América Latina, com capacidade para 25 mil espectadores e tecnologia de transmissão em 8K nativo.",
+      "A estrutura conta com palco rotativo de 360°, painéis de LED imersivos e cabines insonorizadas para até 20 equipes simultaneamente. Patrocinadores globais já confirmaram presença na inauguração.",
+      "Segundo os organizadores, o investimento total ultrapassa os R$ 800 milhões e deve gerar mais de 3 mil empregos diretos, movimentando o turismo da região com pacotes voltados ao público gamer.",
+    ],
+    quote: {
+      text: "Estamos colocando o Brasil definitivamente no mapa dos grandes torneios mundiais. Essa arena é o sonho de toda uma geração de jogadores.",
+      author: "Marina Costa, CEO da arena",
+    },
+  },
+  "gta6-prevenda": {
+    category: "Games",
+    title: "Vazamento revela detalhes do mapa e pré-venda de GTA 6",
+    excerpt:
+      "Emails internos da Best Buy vazaram informações inéditas sobre o mapa expandido de Vice City e o cronograma oficial de pré-venda.",
+    image: thumb1,
+    author: "Rafael Souza",
+    date: "10 de Junho de 2026",
+    readingTime: "4 min de leitura",
+    body: [
+      "Documentos internos da rede Best Buy vazaram nesta manhã trazendo novas informações sobre a aguardada pré-venda de GTA 6. Segundo o material, o início das reservas foi adiado e o anúncio prévio teria sido um erro operacional da varejista.",
+      "Além do cronograma, os emails também mencionam o tamanho recorde do mapa de Vice City, que será cerca de 70% maior do que o de GTA V, com regiões inéditas dentro dos pântanos e ilhas próximas à costa.",
+      "A Rockstar ainda não comentou oficialmente o vazamento, mas fontes internas afirmam que o material é legítimo. A expectativa é que a pré-venda real seja anunciada nas próximas semanas com edições especiais e bônus exclusivos.",
+    ],
+    quote: {
+      text: "Esse é, sem dúvida, o lançamento mais aguardado da década. Tudo o que vaza vira manchete instantaneamente.",
+      author: "Pedro Lima, analista de mercado",
+    },
+  },
+  "rtx-5090-review": {
     category: "Hardware",
     title: "RTX 5090: a nova rainha das GPUs chega com performance absurda",
     excerpt:
-      "Testamos a placa em jogos AAA com ray tracing. O salto geracional impressiona.",
+      "Testamos a placa em jogos AAA com ray tracing. O salto geracional impressiona, mas o preço pesa no bolso.",
     image: thumb2,
-    date: "09 Jun 2026",
-    readingTime: "7 min",
+    author: "Camila Ferreira",
+    date: "09 de Junho de 2026",
+    readingTime: "7 min de leitura",
+    body: [
+      "A NVIDIA finalmente liberou as primeiras unidades de review da RTX 5090, e os números são impressionantes: até 70% mais performance que a geração anterior em cenários com ray tracing pesado e DLSS 4 habilitado.",
+      "Em jogos como Cyberpunk 2077 e Alan Wake 2, a placa rodou consistentemente acima de 120 FPS em 4K com tudo no máximo. O consumo, no entanto, também subiu, exigindo fontes de no mínimo 1000W.",
+      "O preço sugerido é de R$ 17.999 no Brasil, posicionando a 5090 como uma GPU de entusiasta. Para quem busca custo-benefício, as versões 5070 e 5080 ainda serão as escolhas mais sensatas.",
+    ],
   },
-  {
-    id: "csgo-major-final",
+  "csgo-major-final": {
     category: "E-sports",
     title: "Major de CS: final brasileira garante título inédito após 12 anos",
     excerpt:
-      "Em uma virada épica no quinto mapa, a equipe verde-amarela levantou a taça.",
+      "Em uma virada épica no quinto mapa, a equipe verde-amarela levantou a taça diante de 20 mil torcedores.",
     image: thumb3,
-    date: "08 Jun 2026",
-    readingTime: "5 min",
+    author: "João Mendes",
+    date: "08 de Junho de 2026",
+    readingTime: "5 min de leitura",
+    body: [
+      "Após 12 anos de jejum, o Brasil voltou ao topo do Counter-Strike mundial. A equipe nacional venceu o Major em uma final dramática, decidida no quinto e último mapa, com direito a clutches memoráveis nos rounds finais.",
+      "A torcida lotou a arena e fez história com uma das maiores recepções já vistas em finais internacionais. As redes sociais explodiram com homenagens aos jogadores logo após o triunfo.",
+      "Com o título, o Brasil garante vaga direta no próximo circuito de elite e consolida sua geração como uma das mais fortes da história recente do cenário competitivo.",
+    ],
   },
-  {
-    id: "elden-ring-dlc",
+  "epic-jogo-gratis": {
+    category: "Dicas",
+    title: "Qual o próximo jogo grátis da Epic Store? Saiba aqui!",
+    excerpt:
+      "Adiantamos qual será o próximo título gratuito da loja da Epic Games e quando ele estará disponível.",
+    image: thumb1,
+    author: "Bianca Rocha",
+    date: "07 de Junho de 2026",
+    readingTime: "3 min de leitura",
+    body: [
+      "A Epic Games Store mantém a tradição de oferecer jogos gratuitos toda semana, e a próxima leva promete agradar fãs de aventuras narrativas e roguelikes.",
+      "Segundo vazamentos recorrentes, o próximo título a entrar na lista de freebies será revelado nesta quinta-feira, com retirada permanente para quem resgatar dentro do período.",
+      "Fique atento à página oficial da loja e mantenha o launcher atualizado. Os jogos costumam ficar disponíveis por apenas sete dias antes de retornarem ao preço cheio.",
+    ],
+  },
+  "steam-top10": {
+    category: "Games",
+    title: "Steam: os 10 jogos mais vendidos da semana no Brasil",
+    excerpt:
+      "Lista chacoalhou com a chegada de novos lançamentos indies e o retorno de um clássico de mundo aberto.",
+    image: thumb2,
+    author: "Marcos Vinícius",
+    date: "06 de Junho de 2026",
+    readingTime: "6 min de leitura",
+    body: [
+      "A semana foi de mudanças significativas no top 10 brasileiro da Steam, com a entrada de três indies inéditos e o retorno surpresa de um sandbox lançado há quase uma década.",
+      "Lançamentos AAA ainda dominam as primeiras posições, mas o crescimento dos jogos independentes nacionais merece destaque, especialmente após promoções relâmpago.",
+      "Acompanhe a lista completa com preços atualizados e os principais motivos do sucesso de cada título junto ao público brasileiro nesta edição.",
+    ],
+  },
+  "setup-streaming": {
+    category: "Dicas",
+    title: "Como montar um setup de streaming profissional em 2026",
+    excerpt:
+      "Câmera, microfone, iluminação e software: o guia definitivo para começar a transmitir com qualidade broadcast.",
+    image: thumb3,
+    author: "Letícia Borges",
+    date: "05 de Junho de 2026",
+    readingTime: "8 min de leitura",
+    body: [
+      "Streaming deixou de ser hobby e virou profissão para milhares de brasileiros. Montar um setup adequado é o primeiro passo para se destacar em meio à concorrência cada vez maior.",
+      "Investir em microfone de qualidade, iluminação suave e uma câmera com bom desempenho em pouca luz faz toda a diferença na percepção do público.",
+      "Além do hardware, escolha um software de transmissão estável e configure cenas, alertas e overlays que conversem com a identidade do seu canal.",
+    ],
+  },
+  "ssd-pcie5": {
+    category: "Hardware",
+    title: "SSDs PCIe 5.0 quebram a barreira dos 14 GB/s de leitura",
+    excerpt:
+      "Nova geração de armazenamento promete reduzir drasticamente os tempos de loading em games next-gen.",
+    image: thumb2,
+    author: "Henrique Dias",
+    date: "04 de Junho de 2026",
+    readingTime: "5 min de leitura",
+    body: [
+      "Os primeiros modelos de SSDs PCIe 5.0 chegaram ao mercado e os números são impressionantes: velocidades sequenciais que ultrapassam os 14 GB/s de leitura.",
+      "Na prática, jogos com tecnologia DirectStorage carregam quase instantaneamente, e cargas pesadas em ferramentas profissionais ficam significativamente mais rápidas.",
+      "O ponto de atenção fica para a temperatura: a nova geração esquenta bastante e exige dissipadores robustos ou refrigeração ativa para manter o desempenho constante.",
+    ],
+  },
+  "valorant-champions": {
+    category: "E-sports",
+    title: "Valorant Champions: tabela completa e onde assistir aos jogos",
+    excerpt:
+      "Confira o chaveamento, horários e canais oficiais de transmissão do maior torneio de Valorant do ano.",
+    image: thumb3,
+    author: "Isabela Martins",
+    date: "03 de Junho de 2026",
+    readingTime: "4 min de leitura",
+    body: [
+      "O Valorant Champions 2026 começa em poucos dias e reúne as melhores equipes do mundo em uma disputa milionária pelo título mais cobiçado da modalidade.",
+      "Times brasileiros aparecem como fortes candidatos ao título após um split regional dominante, com destaque para duas organizações que vêm em sequência invicta.",
+      "Veja a tabela completa, horários adaptados ao fuso de Brasília e onde acompanhar cada partida com narração em português oficial.",
+    ],
+  },
+  "elden-ring-dlc": {
     category: "Games",
     title: "Novo DLC de Elden Ring expande mapa em 40% e adiciona chefes inéditos",
     excerpt:
-      "FromSoftware anuncia a maior expansão da história do estúdio.",
+      "FromSoftware anuncia a maior expansão da história do estúdio. Veja trailer, data e requisitos.",
     image: thumb1,
-    date: "02 Jun 2026",
-    readingTime: "6 min",
+    author: "Thiago Nunes",
+    date: "02 de Junho de 2026",
+    readingTime: "6 min de leitura",
+    body: [
+      "A FromSoftware revelou oficialmente o novo DLC de Elden Ring, descrito como a maior expansão já produzida pelo estúdio até hoje, com adição de uma região inteiramente nova ao mapa.",
+      "Junto com a expansão chegam mais de dez chefes inéditos, novas classes de armas e um sistema reformulado de invocações que promete mudar a forma como exploramos as Terras Intermédias.",
+      "O lançamento está marcado para o segundo semestre, com requisitos atualizados em relação ao jogo base e suporte completo a tecnologias de upscaling modernas.",
+    ],
   },
-];
+  "esports-arena": {
+    category: "E-sports",
+    title: "Mundial de E-sports 2026: Brasil sedia maior arena gamer da América Latina",
+    excerpt:
+      "A nova arena promete revolucionar a forma como o público brasileiro acompanha competições internacionais.",
+    image: featuredImg,
+    author: "Lucas Almeida",
+    date: "10 de Junho de 2026",
+    readingTime: "6 min de leitura",
+    body: [
+      "Anunciada nesta semana, a nova arena de e-sports em São Paulo será a maior da América Latina, com capacidade para 25 mil espectadores.",
+      "O investimento total ultrapassa os R$ 800 milhões e deve transformar o cenário competitivo nacional nos próximos anos.",
+    ],
+  },
+};
+
+function humanizeSlug(slug: string): string {
+  return slug
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
 
 function ArticlePage() {
   const { id } = Route.useParams();
+  const article: Article = mockNews[id] ?? {
+    category: "Notícias",
+    title: `Notícia sobre: ${humanizeSlug(id)}`,
+    excerpt:
+      "Conteúdo completo desta notícia estará disponível em breve. Volte mais tarde para conferir todos os detalhes.",
+    image: heroImg,
+    author: "Redação Gamer Guide",
+    date: "Em breve",
+    readingTime: "3 min de leitura",
+    body: [
+      `Estamos preparando uma cobertura completa sobre "${humanizeSlug(id)}". Em breve você poderá ler todos os detalhes aqui mesmo no Gamer Guide.`,
+      "Enquanto isso, continue explorando outras notícias do universo gamer e fique ligado nas atualizações diárias da nossa redação.",
+    ],
+  };
+
+  const related = Object.entries(mockNews)
+    .filter(([key]) => key !== id)
+    .slice(0, 3)
+    .map(([key, value]) => ({ id: key, ...value }));
 
   return (
     <div className="min-h-dvh bg-background text-foreground">
@@ -79,7 +261,7 @@ function ArticlePage() {
           <div className="mx-auto max-w-7xl">
             <div className="relative overflow-hidden rounded-3xl border border-border bg-card">
               <img
-                src={heroImg}
+                src={article.image}
                 alt=""
                 width={1920}
                 height={896}
@@ -92,26 +274,26 @@ function ArticlePage() {
               <div className="absolute inset-x-0 bottom-0 p-6 sm:p-10 lg:p-14">
                 <div className="max-w-4xl">
                   <span className="inline-flex items-center rounded-full bg-neon px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-neon-foreground shadow-[0_0_24px_color-mix(in_oklab,var(--neon)_55%,transparent)]">
-                    E-sports
+                    {article.category}
                   </span>
                   <h1 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
-                    Mundial de E-sports 2026: Brasil sedia maior arena gamer da América Latina
+                    {article.title}
                   </h1>
                   <p className="mt-4 max-w-3xl text-sm text-zinc-300 sm:text-base">
-                    Com 25 mil lugares e infraestrutura de última geração, a arena promete revolucionar a forma como o público brasileiro acompanha competições internacionais.
+                    {article.excerpt}
                   </p>
                   <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
                     <span className="inline-flex items-center gap-1.5">
                       <User className="h-4 w-4" aria-hidden />
-                      Por Lucas Almeida
+                      Por {article.author}
                     </span>
                     <span className="inline-flex items-center gap-1.5">
                       <Calendar className="h-4 w-4" aria-hidden />
-                      10 de Junho de 2026
+                      {article.date}
                     </span>
                     <span className="inline-flex items-center gap-1.5">
                       <Clock className="h-4 w-4" aria-hidden />
-                      6 min de leitura
+                      {article.readingTime}
                     </span>
                   </div>
                 </div>
@@ -123,50 +305,21 @@ function ArticlePage() {
         {/* Body */}
         <article className="px-4 py-14 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl space-y-6 text-base leading-relaxed text-zinc-300">
-            <p>
-              O cenário competitivo brasileiro acaba de dar um salto histórico. Anunciada nesta semana, a nova arena de e-sports localizada em São Paulo será a maior da América Latina, com capacidade para 25 mil espectadores e tecnologia de transmissão em 8K nativo. O empreendimento marca uma nova era para os torneios profissionais no país (referência: notícia #{id}).
-            </p>
-            <p>
-              A estrutura conta com palco rotativo de 360°, painéis de LED imersivos e cabines insonorizadas para até 20 equipes simultaneamente. Patrocinadores globais já confirmaram presença na inauguração, que deve receber etapas dos principais campeonatos mundiais de Counter-Strike, Valorant, League of Legends e Dota 2.
-            </p>
-            <p>
-              Segundo os organizadores, o investimento total ultrapassa os R$ 800 milhões e envolve parceria entre uma gigante de tecnologia e um conglomerado de mídia esportiva. A previsão é que a arena gere mais de 3 mil empregos diretos e movimente o turismo da região com pacotes voltados ao público gamer.
-            </p>
+            {article.body.map((paragraph, idx) => (
+              <p key={idx}>{paragraph}</p>
+            ))}
 
-            {/* Quote block */}
-            <figure className="my-10 rounded-2xl border border-primary/30 bg-primary/5 p-6 sm:p-8">
-              <Quote className="h-8 w-8 text-primary" aria-hidden />
-              <blockquote className="mt-4 text-lg font-semibold leading-snug text-foreground sm:text-xl">
-                “Estamos colocando o Brasil definitivamente no mapa dos grandes torneios mundiais. Essa arena é o sonho de toda uma geração de jogadores.”
-              </blockquote>
-              <figcaption className="mt-4 text-sm text-muted-foreground">
-                — Marina Costa, CEO da arena
-              </figcaption>
-            </figure>
-
-            <p>
-              Além das competições, o espaço abrigará um museu interativo da história dos videogames, lojas oficiais de equipes e uma área dedicada a criadores de conteúdo, com estúdios prontos para transmissões ao vivo. A expectativa é que o público possa visitar a arena mesmo fora dos dias de evento.
-            </p>
-
-            {/* Inline image */}
-            <figure className="my-10 overflow-hidden rounded-2xl border border-border">
-              <img
-                src={thumb2}
-                alt="Vista interna da arena"
-                loading="lazy"
-                className="h-full w-full object-cover"
-              />
-              <figcaption className="bg-surface px-4 py-3 text-center text-xs text-muted-foreground">
-                Render conceitual da arena principal vista do palco central.
-              </figcaption>
-            </figure>
-
-            <p>
-              A primeira competição confirmada será a etapa final do circuito sul-americano de Valorant, marcada para outubro de 2026. Os ingressos começam a ser vendidos no próximo mês e devem esgotar rapidamente, dada a demanda recorde registrada nas últimas edições realizadas em ginásios menores.
-            </p>
-            <p>
-              Para a comunidade gamer, o anúncio representa mais do que infraestrutura: é o reconhecimento de uma cena que cresceu organicamente e hoje rivaliza em audiência com esportes tradicionais. O Gamer Guide acompanhará de perto cada novidade até a grande inauguração.
-            </p>
+            {article.quote && (
+              <figure className="my-10 rounded-2xl border border-primary/30 bg-primary/5 p-6 sm:p-8">
+                <Quote className="h-8 w-8 text-primary" aria-hidden />
+                <blockquote className="mt-4 text-lg font-semibold leading-snug text-foreground sm:text-xl">
+                  “{article.quote.text}”
+                </blockquote>
+                <figcaption className="mt-4 text-sm text-muted-foreground">
+                  — {article.quote.author}
+                </figcaption>
+              </figure>
+            )}
           </div>
         </article>
 
