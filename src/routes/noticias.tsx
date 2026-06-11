@@ -165,50 +165,59 @@ function NoticiasPage() {
           className="px-4 pt-8 sm:px-6 lg:px-8"
         >
           <div className="mx-auto max-w-7xl">
-            <article className="relative overflow-hidden rounded-3xl border border-border bg-card">
-              <img
-                src={featuredImg}
-                alt=""
-                width={1920}
-                height={768}
-                className="h-[320px] w-full object-cover sm:h-[420px] lg:h-[520px]"
-              />
-              <div
-                aria-hidden
-                className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/20"
-              />
-              <div
-                aria-hidden
-                className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/40 to-transparent"
-              />
+            <Link
+              to="/noticias/$id"
+              params={{ id: "mundial-esports-2026" }}
+              aria-label="Ler notícia em destaque"
+              className="group block rounded-3xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              <article className="relative overflow-hidden rounded-3xl border border-border bg-card transition-all duration-300 group-hover:border-primary/40 group-hover:shadow-[0_20px_60px_-15px_color-mix(in_oklab,var(--primary)_55%,transparent)]">
+                <div className="overflow-hidden">
+                  <img
+                    src={featuredImg}
+                    alt=""
+                    width={1920}
+                    height={768}
+                    className="h-[320px] w-full object-cover transition-transform duration-500 group-hover:scale-105 sm:h-[420px] lg:h-[520px]"
+                  />
+                </div>
+                <div
+                  aria-hidden
+                  className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/20"
+                />
+                <div
+                  aria-hidden
+                  className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/40 to-transparent"
+                />
 
-              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-10 lg:p-14">
-                <div className="max-w-3xl">
-                  <span className="inline-flex items-center rounded-full bg-neon px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-neon-foreground shadow-[0_0_24px_color-mix(in_oklab,var(--neon)_55%,transparent)]">
-                    Destaque
-                  </span>
-                  <h1
-                    id="featured-heading"
-                    className="mt-4 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl"
-                  >
-                    Mundial de E-sports 2026: Brasil sedia maior arena gamer da América Latina
-                  </h1>
-                  <p className="mt-4 max-w-2xl text-sm text-muted-foreground sm:text-base">
-                    Com 25 mil lugares e infraestrutura de última geração, a arena promete revolucionar a forma como o público acompanha competições.
-                  </p>
-                  <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
-                    <span className="inline-flex items-center gap-1.5">
-                      <Calendar className="h-4 w-4" aria-hidden />
-                      10 de Junho de 2026
+                <div className="absolute inset-x-0 bottom-0 p-6 sm:p-10 lg:p-14">
+                  <div className="max-w-3xl">
+                    <span className="inline-flex items-center rounded-full bg-neon px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-neon-foreground shadow-[0_0_24px_color-mix(in_oklab,var(--neon)_55%,transparent)]">
+                      Destaque
                     </span>
-                    <span className="inline-flex items-center gap-1.5">
-                      <User className="h-4 w-4" aria-hidden />
-                      Por Lucas Almeida
-                    </span>
+                    <h1
+                      id="featured-heading"
+                      className="mt-4 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl"
+                    >
+                      Mundial de E-sports 2026: Brasil sedia maior arena gamer da América Latina
+                    </h1>
+                    <p className="mt-4 max-w-2xl text-sm text-muted-foreground sm:text-base">
+                      Com 25 mil lugares e infraestrutura de última geração, a arena promete revolucionar a forma como o público acompanha competições.
+                    </p>
+                    <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
+                      <span className="inline-flex items-center gap-1.5">
+                        <Calendar className="h-4 w-4" aria-hidden />
+                        10 de Junho de 2026
+                      </span>
+                      <span className="inline-flex items-center gap-1.5">
+                        <User className="h-4 w-4" aria-hidden />
+                        Por Lucas Almeida
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </article>
+              </article>
+            </Link>
           </div>
         </section>
 
@@ -265,7 +274,8 @@ function NoticiasPage() {
                 {items.map((item) => (
                   <li key={item.id}>
                     <Link
-                      to="/noticias"
+                      to="/noticias/$id"
+                      params={{ id: item.id }}
                       aria-label={`Ler notícia: ${item.title}`}
                       className="group block h-full rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                     >
