@@ -10,7 +10,7 @@ import thumb1 from "@/assets/news-thumb-1.jpg";
 import thumb2 from "@/assets/news-thumb-2.jpg";
 import thumb3 from "@/assets/news-thumb-3.jpg";
 
-export const Route = createFileRoute("/noticias")({
+export const Route = createFileRoute("/noticias/")({
   head: () => ({
     meta: [
       { title: "Notícias — Gamer Guide" },
