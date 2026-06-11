@@ -274,7 +274,8 @@ function NoticiasPage() {
                 {items.map((item) => (
                   <li key={item.id}>
                     <Link
-                      to="/noticias"
+                      to="/noticias/$id"
+                      params={{ id: item.id }}
                       aria-label={`Ler notícia: ${item.title}`}
                       className="group block h-full rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                     >
