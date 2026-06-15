@@ -1,18 +1,9 @@
 import { useMemo, useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
-import cover1 from "@/assets/game-cover-1.jpg";
-import cover2 from "@/assets/game-cover-2.jpg";
-import cover3 from "@/assets/game-cover-3.jpg";
-import cover4 from "@/assets/game-cover-4.jpg";
-import cover5 from "@/assets/game-cyberpunk.jpg";
-import cover6 from "@/assets/game-elden.jpg";
-import cover7 from "@/assets/game-rdr2.jpg";
-import cover8 from "@/assets/game-starfield.jpg";
 
 export const Route = createFileRoute("/promocoes")({
   head: () => ({
@@ -40,7 +31,7 @@ export const Route = createFileRoute("/promocoes")({
 type Platform = "PC" | "PlayStation" | "Xbox" | "Nintendo";
 
 interface Deal {
-  id: string;
+  slug: string;
   title: string;
   platform: Platform;
   image: string;
@@ -52,78 +43,80 @@ interface Deal {
 const platforms = ["Todos", "PC", "PlayStation", "Xbox", "Nintendo"] as const;
 type Filter = (typeof platforms)[number];
 
+const STEAM = "https://cdn.cloudflare.steamstatic.com/steam/apps";
+
 const deals: Deal[] = [
   {
-    id: "1",
+    slug: "cyberpunk-2077",
     title: "Cyberpunk 2077",
     platform: "PC",
-    image: cover5,
+    image: `${STEAM}/1091500/header.jpg`,
     oldPrice: "R$ 199,90",
     newPrice: "R$ 119,90",
     discount: "-40%",
   },
   {
-    id: "2",
+    slug: "elden-ring",
     title: "Elden Ring",
     platform: "PlayStation",
-    image: cover6,
+    image: `${STEAM}/1245620/header.jpg`,
     oldPrice: "R$ 249,90",
     newPrice: "R$ 149,90",
     discount: "-40%",
   },
   {
-    id: "3",
+    slug: "red-dead-redemption-2",
     title: "Red Dead Redemption 2",
     platform: "Xbox",
-    image: cover7,
+    image: `${STEAM}/1174180/header.jpg`,
     oldPrice: "R$ 299,90",
     newPrice: "R$ 179,90",
     discount: "-40%",
   },
   {
-    id: "4",
+    slug: "starfield",
     title: "Starfield",
     platform: "PC",
-    image: cover8,
+    image: `${STEAM}/1716740/header.jpg`,
     oldPrice: "R$ 249,90",
     newPrice: "R$ 149,90",
     discount: "-40%",
   },
   {
-    id: "5",
-    title: "Neon Racer",
+    slug: "baldurs-gate-3",
+    title: "Baldur's Gate 3",
     platform: "PC",
-    image: cover1,
-    oldPrice: "R$ 89,90",
-    newPrice: "R$ 53,90",
-    discount: "-40%",
+    image: `${STEAM}/1086940/header.jpg`,
+    oldPrice: "R$ 199,90",
+    newPrice: "R$ 139,90",
+    discount: "-30%",
   },
   {
-    id: "6",
-    title: "Blade of Aethelgard",
+    slug: "hogwarts-legacy",
+    title: "Hogwarts Legacy",
     platform: "PlayStation",
-    image: cover2,
-    oldPrice: "R$ 159,90",
-    newPrice: "R$ 95,90",
-    discount: "-40%",
+    image: `${STEAM}/990080/header.jpg`,
+    oldPrice: "R$ 249,90",
+    newPrice: "R$ 124,90",
+    discount: "-50%",
   },
   {
-    id: "7",
-    title: "Void Striker",
+    slug: "the-witcher-3",
+    title: "The Witcher 3: Wild Hunt",
     platform: "Xbox",
-    image: cover3,
-    oldPrice: "R$ 129,90",
-    newPrice: "R$ 77,90",
-    discount: "-40%",
+    image: `${STEAM}/292030/header.jpg`,
+    oldPrice: "R$ 79,90",
+    newPrice: "R$ 23,90",
+    discount: "-70%",
   },
   {
-    id: "8",
-    title: "Wasteland Echo",
+    slug: "hades",
+    title: "Hades",
     platform: "Nintendo",
-    image: cover4,
-    oldPrice: "R$ 189,90",
-    newPrice: "R$ 113,90",
-    discount: "-40%",
+    image: `${STEAM}/1145360/header.jpg`,
+    oldPrice: "R$ 49,90",
+    newPrice: "R$ 24,90",
+    discount: "-50%",
   },
 ];
 
@@ -200,17 +193,15 @@ function PromocoesPage() {
                 Nenhuma promoção encontrada para esta plataforma.
               </p>
             ) : (
-              <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {filtered.map((deal) => (
-                  <li key={deal.id}>
+                  <li key={deal.slug}>
                     <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_20px_50px_-15px_color-mix(in_oklab,var(--primary)_55%,transparent)]">
-                      <div className="relative aspect-[3/4] overflow-hidden bg-surface-elevated">
+                      <div className="relative aspect-video overflow-hidden bg-surface-elevated">
                         <img
                           src={deal.image}
                           alt={deal.title}
                           loading="lazy"
-                          width={768}
-                          height={1024}
                           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                         <span className="absolute right-3 top-3 inline-flex items-center rounded-md bg-neon px-2.5 py-1 text-xs font-extrabold uppercase tracking-wide text-neon-foreground shadow-[0_0_16px_color-mix(in_oklab,var(--neon)_60%,transparent)]">
@@ -233,8 +224,17 @@ function PromocoesPage() {
                           </span>
                         </div>
                         <div className="mt-auto pt-4">
-                          <Button className="w-full rounded-xl bg-primary font-semibold text-primary-foreground shadow-glow hover:bg-primary/90">
-                            Ver Oferta
+                          <Button
+                            asChild
+                            className="w-full rounded-xl bg-primary font-semibold text-primary-foreground shadow-glow hover:bg-primary/90"
+                          >
+                            <Link
+                              to="/promocoes/$slug"
+                              params={{ slug: deal.slug }}
+                              aria-label={`Ver oferta de ${deal.title}`}
+                            >
+                              Ver Oferta
+                            </Link>
                           </Button>
                         </div>
                       </div>
