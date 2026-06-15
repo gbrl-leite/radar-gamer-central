@@ -4,7 +4,7 @@ import { Logo } from "./Logo";
 
 const navItems = [
   { label: "Notícias", to: "/noticias" },
-  { label: "Promoções", to: "/" },
+  { label: "Promoções", to: "/promocoes" },
   { label: "Reviews", to: "/" },
 ] as const;
 
