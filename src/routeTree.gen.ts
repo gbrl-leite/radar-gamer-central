@@ -13,6 +13,7 @@ import { Route as PromocoesRouteImport } from './routes/promocoes'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as NoticiasIndexRouteImport } from './routes/noticias.index'
+import { Route as PromocoesSlugRouteImport } from './routes/promocoes.$slug'
 import { Route as NoticiasIdRouteImport } from './routes/noticias.$id'
 
 const PromocoesRoute = PromocoesRouteImport.update({
@@ -35,6 +36,11 @@ const NoticiasIndexRoute = NoticiasIndexRouteImport.update({
   path: '/noticias/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PromocoesSlugRoute = PromocoesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => PromocoesRoute,
+} as any)
 const NoticiasIdRoute = NoticiasIdRouteImport.update({
   id: '/noticias/$id',
   path: '/noticias/$id',
@@ -44,37 +50,59 @@ const NoticiasIdRoute = NoticiasIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/promocoes': typeof PromocoesRoute
+  '/promocoes': typeof PromocoesRouteWithChildren
   '/noticias/$id': typeof NoticiasIdRoute
+  '/promocoes/$slug': typeof PromocoesSlugRoute
   '/noticias/': typeof NoticiasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/promocoes': typeof PromocoesRoute
+  '/promocoes': typeof PromocoesRouteWithChildren
   '/noticias/$id': typeof NoticiasIdRoute
+  '/promocoes/$slug': typeof PromocoesSlugRoute
   '/noticias': typeof NoticiasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/promocoes': typeof PromocoesRoute
+  '/promocoes': typeof PromocoesRouteWithChildren
   '/noticias/$id': typeof NoticiasIdRoute
+  '/promocoes/$slug': typeof PromocoesSlugRoute
   '/noticias/': typeof NoticiasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/promocoes' | '/noticias/$id' | '/noticias/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/promocoes'
+    | '/noticias/$id'
+    | '/promocoes/$slug'
+    | '/noticias/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/promocoes' | '/noticias/$id' | '/noticias'
-  id: '__root__' | '/' | '/auth' | '/promocoes' | '/noticias/$id' | '/noticias/'
+  to:
+    | '/'
+    | '/auth'
+    | '/promocoes'
+    | '/noticias/$id'
+    | '/promocoes/$slug'
+    | '/noticias'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/promocoes'
+    | '/noticias/$id'
+    | '/promocoes/$slug'
+    | '/noticias/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
-  PromocoesRoute: typeof PromocoesRoute
+  PromocoesRoute: typeof PromocoesRouteWithChildren
   NoticiasIdRoute: typeof NoticiasIdRoute
   NoticiasIndexRoute: typeof NoticiasIndexRoute
 }
@@ -109,6 +137,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NoticiasIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/promocoes/$slug': {
+      id: '/promocoes/$slug'
+      path: '/$slug'
+      fullPath: '/promocoes/$slug'
+      preLoaderRoute: typeof PromocoesSlugRouteImport
+      parentRoute: typeof PromocoesRoute
+    }
     '/noticias/$id': {
       id: '/noticias/$id'
       path: '/noticias/$id'
@@ -119,10 +154,22 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface PromocoesRouteChildren {
+  PromocoesSlugRoute: typeof PromocoesSlugRoute
+}
+
+const PromocoesRouteChildren: PromocoesRouteChildren = {
+  PromocoesSlugRoute: PromocoesSlugRoute,
+}
+
+const PromocoesRouteWithChildren = PromocoesRoute._addFileChildren(
+  PromocoesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
-  PromocoesRoute: PromocoesRoute,
+  PromocoesRoute: PromocoesRouteWithChildren,
   NoticiasIdRoute: NoticiasIdRoute,
   NoticiasIndexRoute: NoticiasIndexRoute,
 }
