@@ -5,7 +5,7 @@ import { Logo } from "./Logo";
 const navItems = [
   { label: "Notícias", to: "/noticias" },
   { label: "Promoções", to: "/promocoes" },
-  { label: "Reviews", to: "/" },
+  { label: "Reviews", to: "/reviews" },
 ] as const;
 
 export function Header() {
