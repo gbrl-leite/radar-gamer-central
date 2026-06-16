@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import heroImg from "@/assets/hero-gamer.jpg";
 
@@ -26,15 +27,16 @@ export function Hero() {
             dos games começa aqui!
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button size="lg" className="rounded-full px-7 font-semibold shadow-glow">
-              Comece agora
+            <Button asChild size="lg" className="rounded-full px-7 font-semibold shadow-glow">
+              <Link to="/auth">Comece agora</Link>
             </Button>
             <Button
+              asChild
               size="lg"
               variant="outline"
               className="rounded-full border-border bg-surface px-7 font-semibold hover:bg-surface-elevated"
             >
-              Explorar promoções
+              <Link to="/promocoes">Explorar promoções</Link>
             </Button>
           </div>
         </div>

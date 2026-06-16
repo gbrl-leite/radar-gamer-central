@@ -1,6 +1,14 @@
-import { Star } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import reviewImg from "@/assets/review-subnautica.jpg";
+
+const featured = {
+  slug: "cyberpunk-2077",
+  title: "CYBERPUNK 2077",
+  image: "https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg",
+  score: 8.5,
+  excerpt:
+    "Depois de anos de patches e da expansão Phantom Liberty, Night City finalmente entrega a experiência cyberpunk prometida: narrativa madura, visual deslumbrante e RPG com escolhas que importam.",
+};
 
 export function ReviewSection() {
   return (
@@ -14,10 +22,10 @@ export function ReviewSection() {
         </h2>
 
         <article className="mt-10 grid overflow-hidden rounded-3xl border border-border bg-card lg:grid-cols-2">
-          <div className="aspect-[16/10] overflow-hidden bg-surface-elevated lg:aspect-auto">
+          <div className="aspect-video overflow-hidden bg-surface-elevated lg:aspect-auto">
             <img
-              src={reviewImg}
-              alt="Cena subaquática de Subnautica 2"
+              src={featured.image}
+              alt={featured.title}
               loading="lazy"
               className="h-full w-full object-cover"
             />
@@ -26,36 +34,33 @@ export function ReviewSection() {
             <span className="inline-flex w-fit items-center rounded-full bg-neon/15 px-3 py-1 text-xs font-bold text-neon ring-1 ring-neon/30">
               REVIEW
             </span>
-            <h3 className="text-3xl font-extrabold tracking-tight sm:text-4xl">SUBNAUTICA 2</h3>
-            <div className="flex items-center gap-2">
-              <div className="flex" aria-label="Avaliação 4,5 de 5 estrelas">
-                {[0, 1, 2, 3, 4].map((i) => (
-                  <Star
-                    key={i}
-                    className="h-5 w-5 fill-neon text-neon"
-                    strokeWidth={1.5}
-                    aria-hidden
-                  />
-                ))}
-              </div>
-              <span className="text-sm font-semibold text-muted-foreground">4.5 / 5</span>
+            <h3 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
+              {featured.title}
+            </h3>
+            <div className="flex items-center gap-4">
+              <span
+                className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary text-xl font-extrabold text-primary-foreground shadow-glow ring-4 ring-background"
+                aria-label={`Nota ${featured.score.toFixed(1)} de 10`}
+              >
+                {featured.score.toFixed(1)}
+              </span>
+              <span className="text-sm font-semibold text-muted-foreground">
+                / 10
+              </span>
             </div>
-            <p className="text-base text-muted-foreground">
-              A sequência mergulha ainda mais fundo: novos biomas alienígenas,
-              criaturas bioluminescentes e uma campanha cooperativa que
-              reinventa a exploração submarina. Tenso, belíssimo e imperdível
-              para fãs de survival.
-            </p>
+            <p className="text-base text-muted-foreground">{featured.excerpt}</p>
             <div className="mt-2 flex flex-wrap items-center gap-5">
-              <Button className="rounded-full px-7 font-semibold shadow-glow">
-                Ler review completo
+              <Button asChild className="rounded-full px-7 font-semibold shadow-glow">
+                <Link to="/reviews/$id" params={{ id: featured.slug }}>
+                  Ler review completo
+                </Link>
               </Button>
-              <a
-                href="/"
+              <Link
+                to="/reviews"
                 className="text-sm font-semibold text-primary transition-colors hover:text-primary-glow"
               >
                 Ver todos os reviews →
-              </a>
+              </Link>
             </div>
           </div>
         </article>
