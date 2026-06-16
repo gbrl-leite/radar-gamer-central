@@ -1,10 +1,10 @@
+import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import rdr from "@/assets/game-rdr2.jpg";
-import cyber from "@/assets/game-cyberpunk.jpg";
-import elden from "@/assets/game-elden.jpg";
-import star from "@/assets/game-starfield.jpg";
+
+const STEAM = "https://cdn.cloudflare.steamstatic.com/steam/apps";
 
 interface Offer {
+  slug: string;
   title: string;
   oldPrice: string;
   newPrice: string;
@@ -13,10 +13,10 @@ interface Offer {
 }
 
 const offers: Offer[] = [
-  { title: "Red Dead Redemption 2", oldPrice: "R$ 199,90", newPrice: "R$ 99,95", discount: 50, image: rdr },
-  { title: "Cyberpunk 2077", oldPrice: "R$ 249,90", newPrice: "R$ 74,97", discount: 70, image: cyber },
-  { title: "Elden Ring", oldPrice: "R$ 249,90", newPrice: "R$ 174,93", discount: 30, image: elden },
-  { title: "Starfield", oldPrice: "R$ 299,90", newPrice: "R$ 149,95", discount: 50, image: star },
+  { slug: "red-dead-redemption-2", title: "Red Dead Redemption 2", oldPrice: "R$ 299,90", newPrice: "R$ 179,90", discount: 40, image: `${STEAM}/1174180/header.jpg` },
+  { slug: "cyberpunk-2077", title: "Cyberpunk 2077", oldPrice: "R$ 199,90", newPrice: "R$ 119,90", discount: 40, image: `${STEAM}/1091500/header.jpg` },
+  { slug: "elden-ring", title: "Elden Ring", oldPrice: "R$ 249,90", newPrice: "R$ 149,90", discount: 40, image: `${STEAM}/1245620/header.jpg` },
+  { slug: "starfield", title: "Starfield", oldPrice: "R$ 249,90", newPrice: "R$ 149,90", discount: 40, image: `${STEAM}/1716740/header.jpg` },
 ];
 
 export function OffersSection() {
@@ -34,9 +34,9 @@ export function OffersSection() {
 
         <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {offers.map((offer) => (
-            <li key={offer.title}>
+            <li key={offer.slug}>
               <article className="card-hover group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card">
-                <div className="relative aspect-[4/5] overflow-hidden bg-surface-elevated">
+                <div className="relative aspect-video overflow-hidden bg-surface-elevated">
                   <img
                     src={offer.image}
                     alt={offer.title}
@@ -53,7 +53,11 @@ export function OffersSection() {
                     <span className="text-sm text-muted-foreground line-through">{offer.oldPrice}</span>
                     <span className="text-lg font-extrabold text-neon">{offer.newPrice}</span>
                   </div>
-                  <Button className="mt-auto w-full rounded-lg font-semibold">Ver oferta</Button>
+                  <Button asChild className="mt-auto w-full rounded-lg font-semibold">
+                    <Link to="/promocoes/$slug" params={{ slug: offer.slug }}>
+                      Ver oferta
+                    </Link>
+                  </Button>
                 </div>
               </article>
             </li>
@@ -62,10 +66,11 @@ export function OffersSection() {
 
         <div className="mt-10 flex justify-center">
           <Button
+            asChild
             variant="outline"
             className="rounded-full border-border bg-surface px-7 font-semibold hover:bg-surface-elevated"
           >
-            Ver todas as promoções
+            <Link to="/promocoes">Ver todas as promoções</Link>
           </Button>
         </div>
       </div>

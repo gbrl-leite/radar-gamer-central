@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import gta from "@/assets/news-gta6.jpg";
 import epic from "@/assets/news-epic.jpg";
@@ -6,6 +7,7 @@ import steam from "@/assets/news-steam.jpg";
 type Category = "GAMES" | "DICAS";
 
 interface NewsItem {
+  id: string;
   category: Category;
   title: string;
   excerpt: string;
@@ -14,6 +16,7 @@ interface NewsItem {
 
 const items: NewsItem[] = [
   {
+    id: "gta6-prevenda",
     category: "GAMES",
     title: "Pré-venda de GTA 6 não deve começar hoje (18) e foi um erro",
     excerpt:
@@ -21,6 +24,7 @@ const items: NewsItem[] = [
     image: gta,
   },
   {
+    id: "epic-jogo-gratis",
     category: "DICAS",
     title: "Qual o próximo jogo grátis da Epic Store? Saiba aqui!",
     excerpt:
@@ -28,6 +32,7 @@ const items: NewsItem[] = [
     image: epic,
   },
   {
+    id: "steam-top10",
     category: "GAMES",
     title: "Steam: Os 10 jogos mais vendidos da semana",
     excerpt:
@@ -49,40 +54,47 @@ export function NewsSection() {
 
         <ul className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {items.map((item) => (
-            <li key={item.title}>
-              <article className="card-hover group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card">
-                <div className="aspect-[16/10] overflow-hidden bg-surface-elevated">
-                  <img
-                    src={item.image}
-                    alt=""
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <span
-                    className={
-                      "inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-bold " +
-                      (item.category === "GAMES"
-                        ? "bg-neon/15 text-neon ring-1 ring-neon/30"
-                        : "bg-primary/15 text-primary ring-1 ring-primary/30")
-                    }
-                  >
-                    {item.category}
-                  </span>
-                  <h3 className="mt-4 text-lg font-extrabold leading-snug">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-sm text-muted-foreground">{item.excerpt}</p>
-                </div>
-              </article>
+            <li key={item.id}>
+              <Link
+                to="/noticias/$id"
+                params={{ id: item.id }}
+                aria-label={`Ler notícia: ${item.title}`}
+                className="group block h-full rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                <article className="card-hover flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card">
+                  <div className="aspect-[16/10] overflow-hidden bg-surface-elevated">
+                    <img
+                      src={item.image}
+                      alt=""
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col p-6">
+                    <span
+                      className={
+                        "inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-bold " +
+                        (item.category === "GAMES"
+                          ? "bg-neon/15 text-neon ring-1 ring-neon/30"
+                          : "bg-primary/15 text-primary ring-1 ring-primary/30")
+                      }
+                    >
+                      {item.category}
+                    </span>
+                    <h3 className="mt-4 text-lg font-extrabold leading-snug">
+                      {item.title}
+                    </h3>
+                    <p className="mt-3 text-sm text-muted-foreground">{item.excerpt}</p>
+                  </div>
+                </article>
+              </Link>
             </li>
           ))}
         </ul>
 
         <div className="mt-10 flex justify-center">
-          <Button className="rounded-full px-7 font-semibold shadow-glow">
-            Veja todas as notícias
+          <Button asChild className="rounded-full px-7 font-semibold shadow-glow">
+            <Link to="/noticias">Veja todas as notícias</Link>
           </Button>
         </div>
       </div>
