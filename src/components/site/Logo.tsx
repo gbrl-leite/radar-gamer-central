@@ -4,15 +4,17 @@ import { cn } from "@/lib/utils";
 interface LogoProps {
   className?: string;
   showFull?: boolean;
+  variant?: "default" | "overlay";
 }
 
-export function Logo({ className, showFull = false }: LogoProps) {
+export function Logo({ className, showFull = false, variant = "default" }: LogoProps) {
+  const isOverlay = variant === "overlay";
   return (
     <div className={cn("flex items-center gap-2", className)}>
-      <span className="grid h-9 w-9 place-items-center rounded-lg text-[#39FF14]">
+      <span className={cn("grid h-9 w-9 place-items-center rounded-lg", isOverlay ? "text-[#39FF14]" : "text-primary")}>
         <Gamepad2 className="h-5 w-5" aria-hidden />
       </span>
-      <span className="text-xl font-extrabold tracking-tight text-white">
+      <span className={cn("text-xl font-extrabold tracking-tight", isOverlay ? "text-white" : "text-foreground")}>
         {showFull ? "GAMER GUIDE" : "GG"}
       </span>
     </div>
