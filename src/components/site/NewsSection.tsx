@@ -18,9 +18,9 @@ const items: NewsItem[] = [
   {
     id: "gta6-prevenda",
     category: "GAMES",
-    title: "Pré-venda de GTA 6 não deve começar hoje (18) e foi um erro",
+    title: "Pré-venda de GTA 6 não deve começar hoje e foi um erro da Best Buy",
     excerpt:
-      "Segundo emails internos da Best Buy, a indicação de pré-venda de GTA 6 nesta segunda (18) foi um erro.",
+      "Emails internos vazados indicam que o anúncio da pré-venda foi um equívoco. Veja o que esperar do lançamento.",
     image: gta,
   },
   {
@@ -28,15 +28,15 @@ const items: NewsItem[] = [
     category: "DICAS",
     title: "Qual o próximo jogo grátis da Epic Store? Saiba aqui!",
     excerpt:
-      "A Gamer Guide conta para você qual será o próximo jogo gratuito da loja da Epic Games.",
+      "Adiantamos qual será o próximo título gratuito da loja da Epic Games e quando ele estará disponível.",
     image: epic,
   },
   {
     id: "steam-top10",
     category: "GAMES",
-    title: "Steam: Os 10 jogos mais vendidos da semana",
+    title: "Steam: os 10 jogos mais vendidos da semana no Brasil",
     excerpt:
-      "Nesta semana, a lista de jogos mais vendidos pela Steam mudou bastante no Brasil e no resto do mundo. Confira!",
+      "Lista chacoalhou com a chegada de novos lançamentos indies e o retorno de um clássico de mundo aberto.",
     image: steam,
   },
 ];
