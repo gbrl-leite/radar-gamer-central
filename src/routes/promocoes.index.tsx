@@ -5,7 +5,7 @@ import { Footer } from "@/components/site/Footer";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/promocoes")({
+export const Route = createFileRoute("/promocoes/")({
   head: () => ({
     meta: [
       { title: "Ofertas e Descontos — Gamer Guide" },
