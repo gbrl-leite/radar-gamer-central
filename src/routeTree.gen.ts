@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PromocoesRouteImport } from './routes/promocoes'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PromocoesIndexRouteImport } from './routes/promocoes.index'
@@ -16,6 +17,11 @@ import { Route as NoticiasIndexRouteImport } from './routes/noticias.index'
 import { Route as PromocoesSlugRouteImport } from './routes/promocoes.$slug'
 import { Route as NoticiasIdRouteImport } from './routes/noticias.$id'
 
+const PromocoesRoute = PromocoesRouteImport.update({
+  id: '/promocoes',
+  path: '/promocoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
@@ -27,9 +33,9 @@ const IndexRoute = IndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const PromocoesIndexRoute = PromocoesIndexRouteImport.update({
-  id: '/promocoes/',
-  path: '/promocoes/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => PromocoesRoute,
 } as any)
 const NoticiasIndexRoute = NoticiasIndexRouteImport.update({
   id: '/noticias/',
@@ -37,9 +43,9 @@ const NoticiasIndexRoute = NoticiasIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const PromocoesSlugRoute = PromocoesSlugRouteImport.update({
-  id: '/promocoes/$slug',
-  path: '/promocoes/$slug',
-  getParentRoute: () => rootRouteImport,
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => PromocoesRoute,
 } as any)
 const NoticiasIdRoute = NoticiasIdRouteImport.update({
   id: '/noticias/$id',
@@ -50,6 +56,7 @@ const NoticiasIdRoute = NoticiasIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/promocoes': typeof PromocoesRouteWithChildren
   '/noticias/$id': typeof NoticiasIdRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
   '/noticias/': typeof NoticiasIndexRoute
@@ -67,6 +74,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/promocoes': typeof PromocoesRouteWithChildren
   '/noticias/$id': typeof NoticiasIdRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
   '/noticias/': typeof NoticiasIndexRoute
@@ -77,6 +85,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/promocoes'
     | '/noticias/$id'
     | '/promocoes/$slug'
     | '/noticias/'
@@ -93,6 +102,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/auth'
+    | '/promocoes'
     | '/noticias/$id'
     | '/promocoes/$slug'
     | '/noticias/'
@@ -102,14 +112,20 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
+  PromocoesRoute: typeof PromocoesRouteWithChildren
   NoticiasIdRoute: typeof NoticiasIdRoute
-  PromocoesSlugRoute: typeof PromocoesSlugRoute
   NoticiasIndexRoute: typeof NoticiasIndexRoute
-  PromocoesIndexRoute: typeof PromocoesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/promocoes': {
+      id: '/promocoes'
+      path: '/promocoes'
+      fullPath: '/promocoes'
+      preLoaderRoute: typeof PromocoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
@@ -126,10 +142,10 @@ declare module '@tanstack/react-router' {
     }
     '/promocoes/': {
       id: '/promocoes/'
-      path: '/promocoes'
+      path: '/'
       fullPath: '/promocoes/'
       preLoaderRoute: typeof PromocoesIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof PromocoesRoute
     }
     '/noticias/': {
       id: '/noticias/'
@@ -140,10 +156,10 @@ declare module '@tanstack/react-router' {
     }
     '/promocoes/$slug': {
       id: '/promocoes/$slug'
-      path: '/promocoes/$slug'
+      path: '/$slug'
       fullPath: '/promocoes/$slug'
       preLoaderRoute: typeof PromocoesSlugRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof PromocoesRoute
     }
     '/noticias/$id': {
       id: '/noticias/$id'
@@ -155,13 +171,26 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface PromocoesRouteChildren {
+  PromocoesSlugRoute: typeof PromocoesSlugRoute
+  PromocoesIndexRoute: typeof PromocoesIndexRoute
+}
+
+const PromocoesRouteChildren: PromocoesRouteChildren = {
+  PromocoesSlugRoute: PromocoesSlugRoute,
+  PromocoesIndexRoute: PromocoesIndexRoute,
+}
+
+const PromocoesRouteWithChildren = PromocoesRoute._addFileChildren(
+  PromocoesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
+  PromocoesRoute: PromocoesRouteWithChildren,
   NoticiasIdRoute: NoticiasIdRoute,
-  PromocoesSlugRoute: PromocoesSlugRoute,
   NoticiasIndexRoute: NoticiasIndexRoute,
-  PromocoesIndexRoute: PromocoesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
