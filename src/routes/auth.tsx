@@ -127,7 +127,7 @@ function AuthPage() {
 
           <div className="w-full max-w-md">
             <div className="mb-8 lg:hidden">
-              <Logo showFull />
+              <Logo showFull variant="overlay" />
             </div>
 
             <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
