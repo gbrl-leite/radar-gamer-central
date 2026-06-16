@@ -79,7 +79,7 @@ const mockReviews: Review[] = [
     date: "01 Jun 2026",
   },
   {
-    slug: "demon-slayer-hinokami",
+    slug: "demon-slayer",
     title: "Demon Slayer: The Hinokami Chronicles",
     image: `${STEAM}/1490890/header.jpg`,
     score: 8.0,
