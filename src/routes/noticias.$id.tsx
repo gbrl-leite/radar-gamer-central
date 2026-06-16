@@ -57,21 +57,21 @@ const mockNews: Record<string, Article> = {
   },
   "gta6-prevenda": {
     category: "Games",
-    title: "Vazamento revela detalhes do mapa e pré-venda de GTA 6",
+    title: "Pré-venda de GTA 6 não deve começar hoje e foi um erro da Best Buy",
     excerpt:
-      "Emails internos da Best Buy vazaram informações inéditas sobre o mapa expandido de Vice City e o cronograma oficial de pré-venda.",
+      "Emails internos vazados indicam que o anúncio da pré-venda foi um equívoco. Veja o que esperar do lançamento.",
     image: thumb1,
     author: "Rafael Souza",
     date: "10 de Junho de 2026",
     readingTime: "4 min de leitura",
     body: [
-      "Documentos internos da rede Best Buy vazaram nesta manhã trazendo novas informações sobre a aguardada pré-venda de GTA 6. Segundo o material, o início das reservas foi adiado e o anúncio prévio teria sido um erro operacional da varejista.",
-      "Além do cronograma, os emails também mencionam o tamanho recorde do mapa de Vice City, que será cerca de 70% maior do que o de GTA V, com regiões inéditas dentro dos pântanos e ilhas próximas à costa.",
-      "A Rockstar ainda não comentou oficialmente o vazamento, mas fontes internas afirmam que o material é legítimo. A expectativa é que a pré-venda real seja anunciada nas próximas semanas com edições especiais e bônus exclusivos.",
+      "A expectativa de que a pré-venda de GTA 6 começaria nesta segunda-feira (18) foi desfeita após a própria Best Buy admitir, em comunicação interna, que o disparo de emails promocionais aos clientes foi um erro operacional. Nenhuma data oficial de reservas foi confirmada pela Rockstar Games até o momento.",
+      "De acordo com prints compartilhados por funcionários da varejista, o sistema da Best Buy chegou a criar páginas de produto provisórias para edições padrão e collector's do jogo, o que disparou automaticamente notificações para usuários cadastrados em listas de interesse. A loja já removeu as páginas e enviou um comunicado pedindo desculpas pela confusão.",
+      "A Rockstar segue mantendo silêncio absoluto sobre datas de pré-venda, e fontes ligadas à publisher afirmam que qualquer anúncio nesse sentido viria primeiro pelos canais oficiais da empresa — e não por uma rede de varejo. Por enquanto, a recomendação é ignorar listas e cronogramas que circulam fora dos perfis verificados do estúdio.",
     ],
     quote: {
-      text: "Esse é, sem dúvida, o lançamento mais aguardado da década. Tudo o que vaza vira manchete instantaneamente.",
-      author: "Pedro Lima, analista de mercado",
+      text: "Foi um erro interno de cadastro. Nenhuma pré-venda de GTA 6 está autorizada hoje pela Rockstar nas nossas lojas.",
+      author: "Comunicado interno atribuído à Best Buy",
     },
   },
   "rtx-5090-review": {
