@@ -97,11 +97,11 @@ function AuthPage() {
             height={1536}
           />
           <div
-            className="absolute inset-0 bg-gradient-to-b from-zinc-950/80 via-zinc-950/50 to-purple-900/40"
+            className="absolute inset-0 bg-gradient-to-t from-zinc-950/95 via-zinc-950/50 to-transparent"
             aria-hidden
           />
           <div className="relative z-10 flex h-full flex-col justify-between p-10">
-            <Logo showFull />
+            <Logo showFull variant="overlay" />
             <div className="max-w-md">
               <h2 className="text-4xl font-extrabold leading-tight tracking-tight">
                 Seu radar de <span className="text-gradient-radar">notícias e ofertas</span> gamer.
@@ -127,7 +127,7 @@ function AuthPage() {
 
           <div className="w-full max-w-md">
             <div className="mb-8 lg:hidden">
-              <Logo showFull />
+              <Logo showFull variant="overlay" />
             </div>
 
             <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
