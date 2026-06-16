@@ -12,8 +12,10 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PromocoesRouteImport } from './routes/promocoes'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ReviewsIndexRouteImport } from './routes/reviews.index'
 import { Route as PromocoesIndexRouteImport } from './routes/promocoes.index'
 import { Route as NoticiasIndexRouteImport } from './routes/noticias.index'
+import { Route as ReviewsIdRouteImport } from './routes/reviews.$id'
 import { Route as PromocoesSlugRouteImport } from './routes/promocoes.$slug'
 import { Route as NoticiasIdRouteImport } from './routes/noticias.$id'
 
@@ -32,6 +34,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReviewsIndexRoute = ReviewsIndexRouteImport.update({
+  id: '/reviews/',
+  path: '/reviews/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PromocoesIndexRoute = PromocoesIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -40,6 +47,11 @@ const PromocoesIndexRoute = PromocoesIndexRouteImport.update({
 const NoticiasIndexRoute = NoticiasIndexRouteImport.update({
   id: '/noticias/',
   path: '/noticias/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReviewsIdRoute = ReviewsIdRouteImport.update({
+  id: '/reviews/$id',
+  path: '/reviews/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PromocoesSlugRoute = PromocoesSlugRouteImport.update({
@@ -59,16 +71,20 @@ export interface FileRoutesByFullPath {
   '/promocoes': typeof PromocoesRouteWithChildren
   '/noticias/$id': typeof NoticiasIdRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
+  '/reviews/$id': typeof ReviewsIdRoute
   '/noticias/': typeof NoticiasIndexRoute
   '/promocoes/': typeof PromocoesIndexRoute
+  '/reviews/': typeof ReviewsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/noticias/$id': typeof NoticiasIdRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
+  '/reviews/$id': typeof ReviewsIdRoute
   '/noticias': typeof NoticiasIndexRoute
   '/promocoes': typeof PromocoesIndexRoute
+  '/reviews': typeof ReviewsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -77,8 +93,10 @@ export interface FileRoutesById {
   '/promocoes': typeof PromocoesRouteWithChildren
   '/noticias/$id': typeof NoticiasIdRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
+  '/reviews/$id': typeof ReviewsIdRoute
   '/noticias/': typeof NoticiasIndexRoute
   '/promocoes/': typeof PromocoesIndexRoute
+  '/reviews/': typeof ReviewsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -88,16 +106,20 @@ export interface FileRouteTypes {
     | '/promocoes'
     | '/noticias/$id'
     | '/promocoes/$slug'
+    | '/reviews/$id'
     | '/noticias/'
     | '/promocoes/'
+    | '/reviews/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
     | '/noticias/$id'
     | '/promocoes/$slug'
+    | '/reviews/$id'
     | '/noticias'
     | '/promocoes'
+    | '/reviews'
   id:
     | '__root__'
     | '/'
@@ -105,8 +127,10 @@ export interface FileRouteTypes {
     | '/promocoes'
     | '/noticias/$id'
     | '/promocoes/$slug'
+    | '/reviews/$id'
     | '/noticias/'
     | '/promocoes/'
+    | '/reviews/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -114,7 +138,9 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   PromocoesRoute: typeof PromocoesRouteWithChildren
   NoticiasIdRoute: typeof NoticiasIdRoute
+  ReviewsIdRoute: typeof ReviewsIdRoute
   NoticiasIndexRoute: typeof NoticiasIndexRoute
+  ReviewsIndexRoute: typeof ReviewsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -140,6 +166,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reviews/': {
+      id: '/reviews/'
+      path: '/reviews'
+      fullPath: '/reviews/'
+      preLoaderRoute: typeof ReviewsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/promocoes/': {
       id: '/promocoes/'
       path: '/'
@@ -152,6 +185,13 @@ declare module '@tanstack/react-router' {
       path: '/noticias'
       fullPath: '/noticias/'
       preLoaderRoute: typeof NoticiasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reviews/$id': {
+      id: '/reviews/$id'
+      path: '/reviews/$id'
+      fullPath: '/reviews/$id'
+      preLoaderRoute: typeof ReviewsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/promocoes/$slug': {
@@ -190,7 +230,9 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   PromocoesRoute: PromocoesRouteWithChildren,
   NoticiasIdRoute: NoticiasIdRoute,
+  ReviewsIdRoute: ReviewsIdRoute,
   NoticiasIndexRoute: NoticiasIndexRoute,
+  ReviewsIndexRoute: ReviewsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
