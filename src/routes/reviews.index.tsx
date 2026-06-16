@@ -240,7 +240,7 @@ function ReviewsPage() {
                           loading="lazy"
                           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
-                        <div className="absolute -bottom-6 right-4">
+                        <div className="absolute bottom-2 right-2">
                           <ScoreBadge score={review.score} />
                         </div>
                       </div>
