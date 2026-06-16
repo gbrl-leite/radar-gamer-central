@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import heroImg from "@/assets/hero-gamer.jpg";
+import heroImg from "@/assets/hero-gamer.png";
 
 export function Hero() {
   return (
@@ -41,17 +41,17 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative flex justify-center lg:justify-end">
+        <div className="relative flex justify-center bg-transparent lg:justify-end">
           <div
             aria-hidden
-            className="absolute inset-0 -z-10 rounded-full bg-gradient-to-br from-primary/20 via-transparent to-neon/10 blur-2xl"
+            className="absolute inset-0 -z-10 rounded-full bg-gradient-to-br from-primary/20 via-transparent to-neon/10 blur-3xl"
           />
           <img
             src={heroImg}
             alt="Gamer com headphones e laptop"
             width={520}
             height={520}
-            className="w-full max-w-md drop-shadow-[0_20px_60px_rgba(145,70,255,0.35)]"
+            className="w-full max-w-md bg-transparent drop-shadow-[0_20px_60px_rgba(145,70,255,0.45)]"
           />
         </div>
       </div>
