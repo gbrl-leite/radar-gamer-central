@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 interface LogoProps {
   className?: string;
   showFull?: boolean;
-  minimal?: boolean;
 }
 
 export function Logo({ className, showFull = false }: LogoProps) {
