@@ -101,7 +101,7 @@ function AuthPage() {
             aria-hidden
           />
           <div className="relative z-10 flex h-full flex-col justify-between p-10">
-            <Logo showFull />
+            <Logo showFull variant="overlay" />
             <div className="max-w-md">
               <h2 className="text-4xl font-extrabold leading-tight tracking-tight">
                 Seu radar de <span className="text-gradient-radar">notícias e ofertas</span> gamer.
