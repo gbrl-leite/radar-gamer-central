@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PromocoesRouteImport } from './routes/promocoes'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PromocoesIndexRouteImport } from './routes/promocoes.index'
 import { Route as NoticiasIndexRouteImport } from './routes/noticias.index'
 import { Route as PromocoesSlugRouteImport } from './routes/promocoes.$slug'
 import { Route as NoticiasIdRouteImport } from './routes/noticias.$id'
@@ -30,6 +31,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const PromocoesIndexRoute = PromocoesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PromocoesRoute,
 } as any)
 const NoticiasIndexRoute = NoticiasIndexRouteImport.update({
   id: '/noticias/',
@@ -54,14 +60,15 @@ export interface FileRoutesByFullPath {
   '/noticias/$id': typeof NoticiasIdRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
   '/noticias/': typeof NoticiasIndexRoute
+  '/promocoes/': typeof PromocoesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/promocoes': typeof PromocoesRouteWithChildren
   '/noticias/$id': typeof NoticiasIdRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
   '/noticias': typeof NoticiasIndexRoute
+  '/promocoes': typeof PromocoesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,6 +78,7 @@ export interface FileRoutesById {
   '/noticias/$id': typeof NoticiasIdRoute
   '/promocoes/$slug': typeof PromocoesSlugRoute
   '/noticias/': typeof NoticiasIndexRoute
+  '/promocoes/': typeof PromocoesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -81,14 +89,15 @@ export interface FileRouteTypes {
     | '/noticias/$id'
     | '/promocoes/$slug'
     | '/noticias/'
+    | '/promocoes/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
-    | '/promocoes'
     | '/noticias/$id'
     | '/promocoes/$slug'
     | '/noticias'
+    | '/promocoes'
   id:
     | '__root__'
     | '/'
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/noticias/$id'
     | '/promocoes/$slug'
     | '/noticias/'
+    | '/promocoes/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -130,6 +140,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/promocoes/': {
+      id: '/promocoes/'
+      path: '/'
+      fullPath: '/promocoes/'
+      preLoaderRoute: typeof PromocoesIndexRouteImport
+      parentRoute: typeof PromocoesRoute
+    }
     '/noticias/': {
       id: '/noticias/'
       path: '/noticias'
@@ -156,10 +173,12 @@ declare module '@tanstack/react-router' {
 
 interface PromocoesRouteChildren {
   PromocoesSlugRoute: typeof PromocoesSlugRoute
+  PromocoesIndexRoute: typeof PromocoesIndexRoute
 }
 
 const PromocoesRouteChildren: PromocoesRouteChildren = {
   PromocoesSlugRoute: PromocoesSlugRoute,
+  PromocoesIndexRoute: PromocoesIndexRoute,
 }
 
 const PromocoesRouteWithChildren = PromocoesRoute._addFileChildren(
@@ -176,13 +195,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
