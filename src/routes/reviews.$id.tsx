@@ -137,8 +137,8 @@ const mockReviewDetails: Record<string, ReviewDetail> = {
     verdict:
       "Starfield é ambicioso e divertido em doses controladas, mas falha em entregar a magia de explorar o desconhecido.",
   },
-  "demon-slayer-hinokami": {
-    slug: "demon-slayer-hinokami",
+  "demon-slayer": {
+    slug: "demon-slayer",
     title: "Demon Slayer: The Hinokami Chronicles",
     image: `${STEAM}/1490890/header.jpg`,
     score: 8.0,
