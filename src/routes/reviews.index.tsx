@@ -81,7 +81,7 @@ const mockReviews: Review[] = [
   {
     slug: "demon-slayer-hinokami",
     title: "Demon Slayer: The Hinokami Chronicles",
-    image: `${STEAM}/1377710/header.jpg`,
+    image: `${STEAM}/1490890/header.jpg`,
     score: 8.0,
     verdict:
       "Veredito: Um banquete visual para fãs do anime, com combates frenéticos e fiéis à obra.",
@@ -240,7 +240,7 @@ function ReviewsPage() {
                           loading="lazy"
                           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
-                        <div className="absolute -bottom-6 right-4">
+                        <div className="absolute bottom-2 right-2">
                           <ScoreBadge score={review.score} />
                         </div>
                       </div>
