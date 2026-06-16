@@ -10,12 +10,7 @@ interface LogoProps {
 export function Logo({ className, showFull = false, minimal = false }: LogoProps) {
   return (
     <div className={cn("flex items-center gap-2", className)}>
-      <span
-        className={cn(
-          "grid h-9 w-9 place-items-center rounded-lg text-primary",
-          !minimal && "bg-primary/15 ring-1 ring-primary/30"
-        )}
-      >
+      <span className="grid h-9 w-9 place-items-center rounded-lg text-primary">
         <Gamepad2 className="h-5 w-5" aria-hidden />
       </span>
       <span className="text-xl font-extrabold tracking-tight">
