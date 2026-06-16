@@ -97,11 +97,7 @@ function AuthPage() {
             height={1536}
           />
           <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(135deg, color-mix(in oklab, var(--primary) 75%, transparent) 0%, color-mix(in oklab, var(--background) 90%, transparent) 60%, var(--background) 100%)",
-            }}
+            className="absolute inset-0 bg-gradient-to-b from-zinc-950/80 via-zinc-950/50 to-purple-900/40"
             aria-hidden
           />
           <div className="relative z-10 flex h-full flex-col justify-between p-10">
