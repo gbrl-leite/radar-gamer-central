@@ -1,8 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import gta from "@/assets/news-gta6.jpg";
-import epic from "@/assets/news-epic.jpg";
-import steam from "@/assets/news-steam.jpg";
+
+const GTA_IMAGE = "https://images.unsplash.com/photo-1605901309584-818e25960b8f?q=80&w=800&auto=format&fit=crop";
+const EPIC_IMAGE = "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800&auto=format&fit=crop";
+const STEAM_IMAGE = "https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?q=80&w=800&auto=format&fit=crop";
 
 type Category = "GAMES" | "DICAS";
 
