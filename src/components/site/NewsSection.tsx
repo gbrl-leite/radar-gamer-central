@@ -1,8 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import gta from "@/assets/news-gta6.jpg";
-import epic from "@/assets/news-epic.jpg";
-import steam from "@/assets/news-steam.jpg";
+
+const GTA_IMAGE = "https://images.unsplash.com/photo-1605901309584-818e25960b8f?q=80&w=800&auto=format&fit=crop";
+const EPIC_IMAGE = "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800&auto=format&fit=crop";
+const STEAM_IMAGE = "https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?q=80&w=800&auto=format&fit=crop";
 
 type Category = "GAMES" | "DICAS";
 
@@ -21,7 +22,7 @@ const items: NewsItem[] = [
     title: "Pré-venda de GTA 6 não deve começar hoje e foi um erro da Best Buy",
     excerpt:
       "Emails internos vazados indicam que o anúncio da pré-venda foi um equívoco. Veja o que esperar do lançamento.",
-    image: gta,
+    image: GTA_IMAGE,
   },
   {
     id: "epic-jogo-gratis",
@@ -29,7 +30,7 @@ const items: NewsItem[] = [
     title: "Qual o próximo jogo grátis da Epic Store? Saiba aqui!",
     excerpt:
       "Adiantamos qual será o próximo título gratuito da loja da Epic Games e quando ele estará disponível.",
-    image: epic,
+    image: EPIC_IMAGE,
   },
   {
     id: "steam-top10",
@@ -37,7 +38,7 @@ const items: NewsItem[] = [
     title: "Steam: os 10 jogos mais vendidos da semana no Brasil",
     excerpt:
       "Lista chacoalhou com a chegada de novos lançamentos indies e o retorno de um clássico de mundo aberto.",
-    image: steam,
+    image: STEAM_IMAGE,
   },
 ];
 
