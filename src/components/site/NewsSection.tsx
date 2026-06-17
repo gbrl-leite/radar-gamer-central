@@ -71,12 +71,24 @@ export function NewsSection() {
                 className="group block h-full rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 <article className="card-hover flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card">
-                  <div className="aspect-[16/10] overflow-hidden bg-surface-elevated">
+                  <div
+                    className={
+                      "aspect-[16/10] overflow-hidden " +
+                      (item.imageVariant === "logo"
+                        ? "bg-zinc-900 p-6"
+                        : "bg-surface-elevated")
+                    }
+                  >
                     <img
                       src={item.image}
                       alt=""
                       loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className={
+                        "h-full w-full transition-transform duration-500 group-hover:scale-105 " +
+                        (item.imageVariant === "logo"
+                          ? "object-contain"
+                          : "object-cover")
+                      }
                     />
                   </div>
                   <div className="flex flex-1 flex-col p-6">
