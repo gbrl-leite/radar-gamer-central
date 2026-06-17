@@ -28,6 +28,7 @@ const items: NewsItem[] = [
     excerpt:
       "Emails internos vazados indicam que o anúncio da pré-venda foi um equívoco. Veja o que esperar do lançamento.",
     image: GTA_IMAGE,
+    imageVariant: "cover",
   },
   {
     id: "epic-jogo-gratis",
@@ -36,6 +37,7 @@ const items: NewsItem[] = [
     excerpt:
       "Adiantamos qual será o próximo título gratuito da loja da Epic Games e quando ele estará disponível.",
     image: EPIC_IMAGE,
+    imageVariant: "logo",
   },
   {
     id: "steam-top10",
@@ -44,6 +46,7 @@ const items: NewsItem[] = [
     excerpt:
       "Lista chacoalhou com a chegada de novos lançamentos indies e o retorno de um clássico de mundo aberto.",
     image: STEAM_IMAGE,
+    imageVariant: "logo",
   },
 ];
 
