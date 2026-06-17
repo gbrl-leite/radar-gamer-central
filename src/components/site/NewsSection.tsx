@@ -1,11 +1,15 @@
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 
-const GTA_IMAGE = "https://images.unsplash.com/photo-1605901309584-818e25960b8f?q=80&w=800&auto=format&fit=crop";
-const EPIC_IMAGE = "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800&auto=format&fit=crop";
-const STEAM_IMAGE = "https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?q=80&w=800&auto=format&fit=crop";
+const GTA_IMAGE =
+  "https://assets-prd.ignimgs.com/2023/12/04/gta-6-button-1701726586445.jpg";
+const EPIC_IMAGE =
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Epic_Games_logo.svg/800px-Epic_Games_logo.svg.png";
+const STEAM_IMAGE =
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/800px-Steam_icon_logo.svg.png";
 
 type Category = "GAMES" | "DICAS";
+type ImageVariant = "cover" | "logo";
 
 interface NewsItem {
   id: string;
@@ -13,6 +17,7 @@ interface NewsItem {
   title: string;
   excerpt: string;
   image: string;
+  imageVariant: ImageVariant;
 }
 
 const items: NewsItem[] = [
