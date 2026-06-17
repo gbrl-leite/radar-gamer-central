@@ -2,11 +2,11 @@ import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 
 const GTA_IMAGE =
-  "https://assets-prd.ignimgs.com/2023/12/04/gta-6-button-1701726586445.jpg";
+  "http://googleusercontent.com/image_collection/image_retrieval/10295158212155521095";
 const EPIC_IMAGE =
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Epic_Games_logo.svg/800px-Epic_Games_logo.svg.png";
+  "http://googleusercontent.com/image_collection/image_retrieval/6240593529115633500";
 const STEAM_IMAGE =
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/800px-Steam_icon_logo.svg.png";
+  "http://googleusercontent.com/image_collection/image_retrieval/17936076112861795150";
 
 type Category = "GAMES" | "DICAS";
 type ImageVariant = "cover" | "logo";
